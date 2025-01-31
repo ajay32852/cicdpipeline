@@ -16,8 +16,9 @@ pipeline {
             steps {
                 script {
                     // Run MSBuild to build the solution
-                     bat 'dotnet restore'
-                     bat 'dotnet build --configuration Release'
+                    // bat 'dotnet restore'
+                    // bat 'dotnet build --configuration Release'
+                     bat 'msbuild Collegedata.sln /p:Configuration=Release'
                 }
             }
         }
