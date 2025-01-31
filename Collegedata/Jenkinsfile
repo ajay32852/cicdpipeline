@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    tools {
+        msbuild 'MSBuild 2022' // Ensure this tool is configured in Jenkins
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Run MSBuild to build the solution
+                    bat 'msbuild Collegedata.sln /p:Configuration=Release'
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                script {
+                    // Run your tests here, if applicable
+                    // For example, if you have a test project, you might run:
+                    // bat 'vstest.console.exe YourTestProject.dll'
+                    echo 'Running tests...'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and tests completed successfully!'
+        }
+        failure {
+            echo 'Build or tests failed.'
+        }
+    }
+}
