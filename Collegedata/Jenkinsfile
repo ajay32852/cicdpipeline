@@ -16,7 +16,8 @@ pipeline {
             steps {
                 script {
                     // Run MSBuild to build the solution
-                    bat 'msbuild Collegedata.sln /p:Configuration=Release'
+                     bat 'dotnet restore'
+                     bat 'dotnet build --configuration Release'
                 }
             }
         }
@@ -30,7 +31,24 @@ pipeline {
                     echo 'Running tests...'
                 }
             }
+
         }
+
+         stage('Deploy') {
+            steps {
+                script {
+                    // Define the source and destination paths
+                      def sourcePath = 'D:\\Projects\\cicdpipeline\\Collegedata\\bin\\Release\\net8.0\\publish\\*' // Adjust
+                      def destinationPath = 'C:\\inetpub\\wwwroot\\doctorbook'
+
+                    // Copy the build output to the destination
+                    bat "xcopy /E /I /Y ${sourcePath} ${destinationPath}"
+                }
+            }
+        }
+
+
+
     }
 
     post {
