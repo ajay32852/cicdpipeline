@@ -6,6 +6,12 @@ pipeline {
     }
 
     stages {
+     stage('Checkout') {
+            steps {
+                // Checkout the code from the repository
+                git 'https://github.com/ajay32852/cicdpipeline.git'
+            }
+        }
         stage('Build') {
             steps {
                 script {
