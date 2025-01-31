@@ -43,6 +43,7 @@ pipeline {
 
                     // Copy the build output to the destination
                     bat "xcopy /E /I /Y ${sourcePath} ${destinationPath}"
+                    echo'Copy and deploy code'
                 }
             }
         }
